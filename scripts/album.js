@@ -1,3 +1,5 @@
+
+
 //Example Album
 var albumPicasso = {
     title: 'The Colors',
@@ -13,8 +15,8 @@ var albumPicasso = {
         { title: 'Magenta', duration: '2:15'}
     ]
 };
- 
- // Another Example Album
+
+// Another Example Album
 var albumMarconi = {
     title: 'The Telephone',
     artist: 'Guglielmo Marconi',
@@ -27,6 +29,22 @@ var albumMarconi = {
         { title: 'Fits in your pocket', duration: '3:21'},
         { title: 'Can you hear me now?', duration: '3:14' },
         { title: 'Wrong phone number', duration: '2:15'}
+    ]
+};
+
+// Another Example Album
+var albumSons = {
+    title: 'Poets & Saints',
+    artist: 'All Sons & Daughters',
+    label: 'Sony',
+    year: '2016',
+    albumArtUrl: 'assets/images/album_covers/21.png',
+    songs: [
+        { title: 'Heaven Meets Earth', duration: '5:01' },
+        { title: 'Path of Sorrow', duration: '3:34' },
+        { title: 'I Wait', duration: '2:41'},
+        { title: 'You Hold it All Together', duration: '5:24' },
+        { title: 'My Roving Heart', duration: '4:19'}
     ]
 };
 
@@ -62,6 +80,22 @@ var setCurrentAlbum = function (album) {
          }
  };
 
-window.onload = function() {
-     setCurrentAlbum(albumPicasso);
+var curAlbum = null;
+var arrAlbums = [albumPicasso, albumMarconi, albumSons];
+
+window.onload = function() {     
+     curAlbum = albumPicasso;
+     setCurrentAlbum(curAlbum);
+     document.getElementsByClassName("album-cover-art")[0].addEventListener("click", toggleAlbum);
  };
+
+var toggleAlbum = function () {      
+        for (var i = 0; i < arrAlbums.length; i++){
+            if (curAlbum == arrAlbums[i]) {
+                curAlbum = i === arrAlbums.length - 1 ? arrAlbums[0] : arrAlbums[i + 1]; 
+                break;
+            }          
+        }
+        
+    setCurrentAlbum(curAlbum);
+};
